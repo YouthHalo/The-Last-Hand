@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://dv7eaova7vu6i"]
+
+[ext_resource type="Texture2D" uid="uid://ddym16k27t7fp" path="res://assets/cards/sprite_03.png" id="1_w0s7k"]
+[ext_resource type="Texture2D" uid="uid://d33i0wyq47h8u" path="res://assets/cards/sprite_02.png" id="2_g64ds"]
+[ext_resource type="Texture2D" uid="uid://433dnm7i6p5q" path="res://assets/cards/sprite_01.png" id="3_tnrj0"]
+[ext_resource type="Texture2D" uid="uid://buitavlp0310s" path="res://assets/cards/sprite_00.png" id="4_36fwb"]
+[ext_resource type="Texture2D" uid="uid://dq27nytmj77fl" path="res://icon.svg" id="5_bvxeo"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e3f8d"]
+polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kpq2q"]
+polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wes0o"]
+polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_jxis3"]
+polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(218, 106)
+texture = ExtResource("1_w0s7k")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(253, 113)
+rotation = 0.261799
+scale = Vector2(1, 1)
+texture = ExtResource("2_g64ds")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(173, 111)
+rotation = -0.261799
+scale = Vector2(1, 1)
+texture = ExtResource("3_tnrj0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(136, 127)
+rotation = -0.523599
+texture = ExtResource("4_36fwb")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(229, 130)
+scale = Vector2(141.821, 131.585)
+shadow_enabled = true
+texture = ExtResource("5_bvxeo")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(218, 106)
+occluder = SubResource("OccluderPolygon2D_e3f8d")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+position = Vector2(253, 113)
+rotation = 0.261799
+scale = Vector2(1, 1)
+occluder = SubResource("OccluderPolygon2D_kpq2q")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+position = Vector2(173, 111)
+rotation = -0.261799
+scale = Vector2(1, 1)
+occluder = SubResource("OccluderPolygon2D_wes0o")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
+position = Vector2(136, 127)
+rotation = -0.523599
+occluder = SubResource("OccluderPolygon2D_jxis3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
