@@ -1,4 +1,4 @@
-extends Node2D
+extends Node2D 
 
 @onready var card = preload("res://scenes/card.tscn")
 
