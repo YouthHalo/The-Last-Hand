@@ -25,18 +25,18 @@ func _process(delta: float) -> void:
 	if not inPlace:
 		if not flipped:
 			scale= scale.lerp(Vector2(0.1, 1), delta*20)
-			if scale.x <= 0.15:
+			if scale.x <= 0.13:
 				$Sprite2D.texture = load("res://assets/cards/value/" + str(id) + ".png")
 				flipped = true
 		if flipped and scale.x < 1:
-			scale= scale.lerp(Vector2(1.05, 1), delta*20)
-		if scale.x > 1: scale.x = 1
-		
+			scale= scale.lerp(Vector2(1, 1), delta*20)
 		position = position.lerp(Vector2(-300, 0), delta * 3)
+		
 		if position.x < -299.9:
 			position.x = -300
 			inPlace = true
-	if flipped and scale.x >=1:
+			
+	if flipped:
 		if hover and not selected:
 			scale= scale.lerp(Vector2(1.1, 1.1), delta*20)
 		elif not hover and not selected:

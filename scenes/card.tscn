@@ -17,5 +17,22 @@ texture = ExtResource("2_ags0e")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_7oukm")
 
+[node name="use" type="Button" parent="."]
+offset_left = 28.0
+offset_top = -27.0
+offset_right = 95.0
+offset_bottom = -5.0
+theme_override_font_sizes/font_size = 10
+text = "use"
+
+[node name="return" type="Button" parent="."]
+offset_left = 28.0
+offset_top = 5.0
+offset_right = 95.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 10
+text = "return
+"
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
