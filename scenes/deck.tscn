@@ -1,7 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://qbqhqlnpucxe"]
 
 [ext_resource type="Script" path="res://scripts/deck.gd" id="1_aikvs"]
-[ext_resource type="Texture2D" uid="uid://dewbw1om2q8wq" path="res://assets/cards/sprite_57.png" id="1_kn2yb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oswjo"]
+load_path = "res://.godot/imported/sprite_57.png-d9618df4023a8b1c39c4c65be22a15b0.ctex"
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r4f8q"]
 polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
@@ -33,55 +35,55 @@ script = ExtResource("1_aikvs")
 
 [node name="Sprite2D8" type="Sprite2D" parent="."]
 position = Vector2(0, 7)
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D8"]
 occluder = SubResource("OccluderPolygon2D_r4f8q")
 
 [node name="Sprite2D7" type="Sprite2D" parent="."]
 position = Vector2(0, 6)
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D7"]
 occluder = SubResource("OccluderPolygon2D_1i8db")
 
 [node name="Sprite2D6" type="Sprite2D" parent="."]
 position = Vector2(0, 5)
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D6"]
 occluder = SubResource("OccluderPolygon2D_j47jc")
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
 position = Vector2(0, 4)
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D5"]
 occluder = SubResource("OccluderPolygon2D_xi0w8")
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
 position = Vector2(0, 3)
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D4"]
 occluder = SubResource("OccluderPolygon2D_ei0cc")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 position = Vector2(0, 2)
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D3"]
 occluder = SubResource("OccluderPolygon2D_ut1ee")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(0, 1)
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D2"]
 occluder = SubResource("OccluderPolygon2D_fras0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_kn2yb")
+texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
 occluder = SubResource("OccluderPolygon2D_4rfj4")
