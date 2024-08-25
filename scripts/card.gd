@@ -1,13 +1,15 @@
 extends Node2D
 
-var num = 22
+var num = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print("bruh")
+	if num < 10:
+		$Sprite2D.texture = load("res://assets/cards/sprite_0" + str(num) + ".png")
+	else:
+		$Sprite2D.texture = load("res://assets/cards/sprite_" + str(num) + ".png")
+	print(num)
+	position = Vector2(-100-num*2, 0)
 	print(position)
-	$Sprite2D.texture = load("res://assets/cards/sprite_"+str(num)+".png")
-	#position = get_global_mouse_position()
-	position = Vector2(-100, 0)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
