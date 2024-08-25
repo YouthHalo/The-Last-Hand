@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://qbqhqlnpucxe"]
+[gd_scene load_steps=12 format=3 uid="uid://qbqhqlnpucxe"]
 
 [ext_resource type="Script" path="res://scripts/deck.gd" id="1_aikvs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fy7oh"]
+size = Vector2(50, 77)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_oswjo"]
 load_path = "res://.godot/imported/sprite_57.png-d9618df4023a8b1c39c4c65be22a15b0.ctex"
@@ -32,6 +35,12 @@ polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
 [node name="Deck" type="Node2D"]
 scale = Vector2(3, 3)
 script = ExtResource("1_aikvs")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 3.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_fy7oh")
 
 [node name="Sprite2D8" type="Sprite2D" parent="."]
 position = Vector2(0, 7)
@@ -87,3 +96,6 @@ texture = SubResource("CompressedTexture2D_oswjo")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
 occluder = SubResource("OccluderPolygon2D_4rfj4")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

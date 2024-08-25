@@ -3,6 +3,8 @@ extends Node2D
 @onready var card = preload("res://scenes/card.tscn")
 
 var currentcard = -1
+var hover = false
+var canClick = true
 var deckArray = [
 	"2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "TH", "JH", "QH", "KH", "AH",
 	"2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "TD", "JD", "QD", "KD", "AD",
@@ -17,12 +19,13 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and hover and canClick:
 		var cardInstance= card.instantiate()
 		currentcard = randi_range(0, 51)
 		cardInstance.id = deckArray[currentcard]
 		print(deckArray.bsearch(currentcard))
 		add_child(cardInstance)
+
 
 func card_value(card: String) -> int:
 	var rank = card[0]
@@ -45,3 +48,10 @@ func custom_sort(a: String, b: String) -> bool:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_area_2d_mouse_entered() -> void:
+	hover = true
+
+func _on_area_2d_mouse_exited() -> void:
+	hover = false
