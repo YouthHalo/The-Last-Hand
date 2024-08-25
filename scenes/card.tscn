@@ -1,13 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://ccg6p05ahdsv5"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_wwqs6"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qae55"]
-load_path = "res://.godot/imported/sprite_00.png-5962ac7b5828794b8b0e2929c9f0df45.ctex"
+[ext_resource type="Texture2D" uid="uid://cu4oo3ngishqa" path="res://assets/cards/back/sprite_57.png" id="2_ags0e"]
 
 [node name="Card" type="Node2D"]
-scale = Vector2(3, 3)
 script = ExtResource("1_wwqs6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("CompressedTexture2D_qae55")
+texture = ExtResource("2_ags0e")

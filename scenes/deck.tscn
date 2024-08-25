@@ -30,7 +30,7 @@ polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
 polygon = PackedVector2Array(-25, 35, -25, -35, 25, -35, 25, 35)
 
 [node name="Deck" type="Node2D"]
-scale = Vector2(2, 2)
+scale = Vector2(3, 3)
 script = ExtResource("1_aikvs")
 
 [node name="Sprite2D8" type="Sprite2D" parent="."]

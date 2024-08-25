@@ -9,6 +9,8 @@ var deckArray = [
 	"2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "TS", "JS", "QS", "KS", "AS",
 	"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "TC", "JC", "QC", "KC", "AC"
 ];
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -17,11 +19,10 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		var cardInstance= card.instantiate()
-		currentcard += 1
-		cardInstance.num = currentcard
+		currentcard = randi_range(0, 51)
+		cardInstance.id = deckArray[currentcard]
+		print(deckArray.bsearch(currentcard))
 		add_child(cardInstance)
-		print(deckArray.size())
-
 
 func card_value(card: String) -> int:
 	var rank = card[0]
@@ -37,6 +38,8 @@ func card_value(card: String) -> int:
 
 func custom_sort(a: String, b: String) -> bool:
 	return card_value(a) < card_value(b)
+##to sort, run
+#deckArray.sort_custom(self, "custom_sort")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
