@@ -9,6 +9,8 @@ var selected = false
 
 
 func _ready() -> void:
+	$use.hide()
+	$return.hide()
 	await get_tree().create_timer(0.1).timeout
 
 
@@ -37,12 +39,17 @@ func _process(delta: float) -> void:
 			inPlace = true
 			
 	if flipped:
-		if hover and not selected:
-			scale= scale.lerp(Vector2(1.1, 1.1), delta*20)
-		elif not hover and not selected:
-			scale= scale.lerp(Vector2(1, 1), delta*20)
 		if selected:
 			scale= scale.lerp(Vector2(1.25, 1.25), delta*20)
+			$use.show()
+			$return.show()
+		else:
+			$use.hide()
+			$return.hide()
+			if hover:
+				scale= scale.lerp(Vector2(1.1, 1.1), delta*20)
+			else:
+				scale= scale.lerp(Vector2(1, 1), delta*20)
 
 
 func _on_area_2d_mouse_entered() -> void:

@@ -1,8 +1,9 @@
 extends Node2D 
 
 @onready var card = preload("res://scenes/card.tscn")
+@onready var player = $".."
 
-var currentcard = -1
+var currentCard = -1
 var hover = false
 var canClick = true
 var deckArray = [
@@ -15,17 +16,52 @@ var deckArray = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	await get_tree().create_timer(0.1).timeout
+	create_card()
 
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and hover and canClick:
-		var cardInstance= card.instantiate()
-		currentcard = randi_range(0, 51)
-		cardInstance.id = deckArray[currentcard]
-		print(deckArray.bsearch(currentcard))
-		add_child(cardInstance)
+		pass
 
+func create_card() -> void:
+	var cardInstance= card.instantiate()
+	currentCard = randi_range(0, 51)
+	cardInstance.id = deckArray[currentCard]
+	add_child(cardInstance)
+	use_card()
+	
+func use_card() -> void:
+	var value = 0
+	if deckArray[currentCard][0] == "T":
+		value = 10
+	elif deckArray[currentCard][0] == "J":
+		value = 11
+	elif deckArray[currentCard][0] == "Q":
+		value = 12
+	elif deckArray[currentCard][0] == "K":
+		value = 13
+	elif deckArray[currentCard][0] == "A":
+		value = 15
+	else:
+		value = int(deckArray[currentCard][0])
+	
+	if deckArray[currentCard][1] == "H":
+		player.health += value
+	elif deckArray[currentCard][1] == "D":
+		player.shield += (value/2)
+	elif deckArray[currentCard][1] == "S":
+		player.dealDamage = value*2
+		player.bleedChance = value*4
+	elif deckArray[currentCard][1] == "C":
+		player.dealDamage = value
+		player.stunChance = value*5
+	
+	print("HP - " + str(player.health))
+	print("Shield - " + String("%0.1f" % player.shield)) #floats dont print normally
+	print("DMG - " + str(player.dealDamage))
+	print("Bleed - " + str(player.bleedChance))
+	print("Stun - " + str(player.stunChance))
 
 func card_value(card: String) -> int:
 	var rank = card[0]
