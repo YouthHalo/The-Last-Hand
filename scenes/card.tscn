@@ -36,3 +36,5 @@ text = "return
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="pressed" from="use" to="." method="_on_use_pressed"]
+[connection signal="pressed" from="return" to="." method="_on_return_pressed"]

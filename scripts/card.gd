@@ -5,8 +5,10 @@ var inPlace = false
 var flipped = false
 var hover = false
 var selected = false
-# Called when the node enters the scene tree for the first time.
 
+# Called when the node enters the scene tree for the first time.
+signal Use
+signal Return
 
 func _ready() -> void:
 	$use.hide()
@@ -20,7 +22,7 @@ func _input(event: InputEvent) -> void:
 			selected = false
 		else:
 			selected = true
-		
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -58,3 +60,9 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	hover = false
+
+
+func _on_use_pressed() -> void:
+	pass
+func _on_return_pressed() -> void:
+	pass

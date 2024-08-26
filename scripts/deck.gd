@@ -13,24 +13,25 @@ var deckArray = [
 	"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "TC", "JC", "QC", "KC", "AC"
 ];
 
-
+signal Use
+signal Return
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	create_card()
 
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and hover and canClick:
-		pass
-
 func create_card() -> void:
 	var cardInstance= card.instantiate()
 	currentCard = randi_range(0, 51)
 	cardInstance.id = deckArray[currentCard]
 	add_child(cardInstance)
-	use_card()
-	
+	var use = cardInstance.get_node("use")
+	use.pressed.connect(self._on_use_pressed)
+	var Return = cardInstance.get_node("return")
+	Return.pressed.connect(self._on_return_pressed)
+
+
 func use_card() -> void:
 	var value = 0
 	if deckArray[currentCard][0] == "T":
@@ -91,3 +92,10 @@ func _on_area_2d_mouse_entered() -> void:
 
 func _on_area_2d_mouse_exited() -> void:
 	hover = false
+
+func _on_use_pressed() -> void:
+	use_card()
+
+
+func _on_return_pressed() -> void:
+	pass

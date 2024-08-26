@@ -1,7 +1,11 @@
 extends Node2D
 
-var health = 100
+@onready var hp = $UI/Health
+@onready var sh = $UI/Shield
+@onready var cds = $UI/Cards
+var health = 50
 var shield = 0.0
+var cards = 52
 var dealDamage = 0
 var stunChance = 0
 var bleedChance = 0
@@ -13,4 +17,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	hp.text = str(health) + " HP"
+	sh.text = "+ " + str(shield) + " Shield HP"
+	cds.text = str(cards) + " Cards"
