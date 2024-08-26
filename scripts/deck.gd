@@ -13,8 +13,9 @@ var deckArray = [
 	"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "TC", "JC", "QC", "KC", "AC"
 ];
 
-signal Use
-signal Return
+var cardInstance
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
@@ -22,15 +23,18 @@ func _ready() -> void:
 
 
 func create_card() -> void:
-	var cardInstance= card.instantiate()
-	currentCard = randi_range(0, 51)
+	cardInstance = card.instantiate()
+	player.cards = deckArray.size()
+
+	currentCard = randi_range(0, deckArray.size()-1)
 	cardInstance.id = deckArray[currentCard]
 	add_child(cardInstance)
 	var use = cardInstance.get_node("use")
 	use.pressed.connect(self._on_use_pressed)
 	var Return = cardInstance.get_node("return")
 	Return.pressed.connect(self._on_return_pressed)
-
+	if deckArray.size() == 1:
+		cardInstance.lastCard = true
 
 func use_card() -> void:
 	var value = 0
@@ -50,7 +54,7 @@ func use_card() -> void:
 	if deckArray[currentCard][1] == "H":
 		player.health += value
 	elif deckArray[currentCard][1] == "D":
-		player.shield += (value/2)
+		player.shield += float(value) / 2.0
 	elif deckArray[currentCard][1] == "S":
 		player.dealDamage = value*2
 		player.bleedChance = value*4
@@ -81,6 +85,41 @@ func custom_sort(a: String, b: String) -> bool:
 ##to sort, run
 #deckArray.sort_custom(self, "custom_sort")
 
+func visual_deck() -> void:
+	if deckArray.size() >= 52:
+		$"8".show()
+	else:
+		$"8".hide()
+		
+	if deckArray.size() >= 45:
+		$"7".show()
+	else:
+		$"7".hide()
+	if deckArray.size() >= 38:
+		$"6".show()
+	else:
+		$"6".hide()
+	if deckArray.size() >= 30:
+		$"5".show()
+	else:
+		$"5".hide()
+	if deckArray.size() >= 23:
+		$"4".show()
+	else:
+		$"4".hide()
+	if deckArray.size() >= 15:
+		$"3".show()
+	else:
+		$"3".hide()
+	if deckArray.size() >= 8:
+		$"2".show()
+	else:
+		$"2".hide()
+	if deckArray.size() > 1:
+		$"1".show()
+	else:
+		$"1".hide()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -95,7 +134,16 @@ func _on_area_2d_mouse_exited() -> void:
 
 func _on_use_pressed() -> void:
 	use_card()
-
+	deckArray.remove_at(currentCard)
+	deckArray.sort_custom(custom_sort)
+	if deckArray.size() > 0:
+		await get_tree().create_timer(0.3).timeout
+		create_card()
+		visual_deck()
+	if deckArray.size() == 0:
+		cardInstance.cards = 0
 
 func _on_return_pressed() -> void:
-	pass
+	#use_card_return()
+	await get_tree().create_timer(0.9).timeout
+	create_card()

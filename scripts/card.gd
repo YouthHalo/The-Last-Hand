@@ -5,7 +5,8 @@ var inPlace = false
 var flipped = false
 var hover = false
 var selected = false
-
+var returning = false
+var lastCard = false
 # Called when the node enters the scene tree for the first time.
 signal Use
 signal Return
@@ -26,7 +27,7 @@ func _input(event: InputEvent) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not inPlace:
+	if not inPlace and not returning:
 		if not flipped:
 			scale= scale.lerp(Vector2(0.1, 1), delta*20)
 			if scale.x <= 0.13:
@@ -40,11 +41,12 @@ func _process(delta: float) -> void:
 			position.x = -300
 			inPlace = true
 			
-	if flipped:
+	if flipped and not returning:
 		if selected:
 			scale= scale.lerp(Vector2(1.25, 1.25), delta*20)
 			$use.show()
-			$return.show()
+			if not lastCard:
+				$return.show()
 		else:
 			$use.hide()
 			$return.hide()
@@ -52,7 +54,22 @@ func _process(delta: float) -> void:
 				scale= scale.lerp(Vector2(1.1, 1.1), delta*20)
 			else:
 				scale= scale.lerp(Vector2(1, 1), delta*20)
+	
+	if returning:
 
+		if not inPlace:
+			if not flipped:
+				scale= scale.lerp(Vector2(0.1, 1), delta*20)
+				if scale.x <= 0.13:
+					$Sprite2D.texture = load("res://assets/cards/back/sprite_57.png")
+					flipped = true
+			if flipped and scale.x < 1:
+				scale= scale.lerp(Vector2(1, 1), delta*20)
+			position = position.lerp(Vector2(20, 0), delta * 3)
+		if position.x > -0.1:
+			position.x = 0
+			flipped = false
+			queue_free()
 
 func _on_area_2d_mouse_entered() -> void:
 	hover = true
@@ -63,6 +80,14 @@ func _on_area_2d_mouse_exited() -> void:
 
 
 func _on_use_pressed() -> void:
-	pass
+	await get_tree().create_timer(0.3).timeout
+	queue_free()
+
 func _on_return_pressed() -> void:
-	pass
+	flipped = false
+	selected = false
+	inPlace = false
+	$use.hide()
+	$return.hide()
+	returning = true
+	

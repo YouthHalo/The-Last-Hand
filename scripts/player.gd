@@ -18,5 +18,5 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	hp.text = str(health) + " HP"
-	sh.text = "+ " + str(shield) + " Shield HP"
+	sh.text = "+ " + String("%0.1f" % shield) + " Shield HP"
 	cds.text = str(cards) + " Cards"
