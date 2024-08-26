@@ -17,6 +17,11 @@ boot_splash/image="res://assets/cards/back/sprite_57.png"
 boot_splash/use_filter=false
 config/icon="res://assets/cards/back/sprite_57.png"
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

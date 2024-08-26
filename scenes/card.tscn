@@ -57,18 +57,18 @@ shape = SubResource("RectangleShape2D_7oukm")
 
 [node name="use" type="Button" parent="."]
 offset_left = 28.0
-offset_top = -27.0
+offset_top = -31.0
 offset_right = 95.0
-offset_bottom = -5.0
-theme_override_font_sizes/font_size = 10
+offset_bottom = -3.0
+theme_override_font_sizes/font_size = 14
 text = "use"
 
 [node name="return" type="Button" parent="."]
 offset_left = 28.0
-offset_top = 5.0
+offset_top = 3.0
 offset_right = 95.0
-offset_bottom = 27.0
-theme_override_font_sizes/font_size = 10
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 14
 text = "return
 "
 
