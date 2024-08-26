@@ -1,5 +1,9 @@
 extends Node2D
 
+@onready var hp = $UI/Health
+@onready var sh = $UI/Shield
+
+
 var floatUp = true
 
 var health = 50.0
@@ -16,6 +20,7 @@ var deckArray = [
 var currentcards = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$UI/Cards.hide()
 	for i in 3:
 		currentcards.append(deckArray[randi_range(0, 51)])
 		print(currentcards)
@@ -31,3 +36,5 @@ func _process(delta: float) -> void:
 		position = position.lerp(Vector2(576, 200), delta * 3)
 		if position.y > 199.5:
 			floatUp = true
+	hp.text = String("%0.1f" % health) + " HP"
+	sh.text = "+ " + String("%0.2f" % shield) + " Shield HP"
