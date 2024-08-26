@@ -1,10 +1,48 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccg6p05ahdsv5"]
+[gd_scene load_steps=10 format=3 uid="uid://ccg6p05ahdsv5"]
 
 [ext_resource type="Script" path="res://scripts/card.gd" id="1_wwqs6"]
 [ext_resource type="Texture2D" uid="uid://cu4oo3ngishqa" path="res://assets/cards/back/sprite_57.png" id="2_ags0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7oukm"]
 size = Vector2(50, 70)
+
+[sub_resource type="Gradient" id="Gradient_drtkr"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_inm36"]
+gradient = SubResource("Gradient_drtkr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xt68m"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 611.51
+initial_velocity_max = 935.25
+scale_min = 3.0
+scale_max = 20.0
+scale_over_velocity_max = 316.55
+color_ramp = SubResource("GradientTexture1D_inm36")
+
+[sub_resource type="Gradient" id="Gradient_kpvb5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xkmnq"]
+gradient = SubResource("Gradient_kpvb5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xqi0q"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 611.51
+initial_velocity_max = 935.25
+scale_min = 3.0
+scale_max = 20.0
+scale_over_velocity_max = 316.55
+color_ramp = SubResource("GradientTexture1D_xkmnq")
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_wwqs6")
@@ -33,6 +71,22 @@ offset_bottom = 27.0
 theme_override_font_sizes/font_size = 10
 text = "return
 "
+
+[node name="redExplosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_xt68m")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+
+[node name="blackExplosion" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_xqi0q")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

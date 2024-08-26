@@ -8,8 +8,7 @@ var selected = false
 var returning = false
 var lastCard = false
 # Called when the node enters the scene tree for the first time.
-signal Use
-signal Return
+
 
 func _ready() -> void:
 	$use.hide()
@@ -80,7 +79,15 @@ func _on_area_2d_mouse_exited() -> void:
 
 
 func _on_use_pressed() -> void:
-	await get_tree().create_timer(0.3).timeout
+	$Sprite2D.hide()
+	selected = false
+	$use.hide()
+	$return.hide()
+	if id[1] == "H" or id[1] == "D":
+		$redExplosion.emitting = true
+	else:
+		$blackExplosion.emitting = true
+	await get_tree().create_timer(0.5).timeout
 	queue_free()
 
 func _on_return_pressed() -> void:

@@ -13,9 +13,6 @@ var deckArray = [
 	"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "TC", "JC", "QC", "KC", "AC"
 ];
 
-var cardInstance
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
@@ -23,7 +20,7 @@ func _ready() -> void:
 
 
 func create_card() -> void:
-	cardInstance = card.instantiate()
+	var cardInstance = card.instantiate()
 	player.cards = deckArray.size()
 
 	currentCard = randi_range(0, deckArray.size()-1)
@@ -37,6 +34,9 @@ func create_card() -> void:
 		cardInstance.lastCard = true
 
 func use_card() -> void:
+	player.stunChance = 0
+	player.bleedChance = 0
+	player.dealDamage = 0
 	var value = 0
 	if deckArray[currentCard][0] == "T":
 		value = 10
@@ -67,6 +67,50 @@ func use_card() -> void:
 	print("DMG - " + str(player.dealDamage))
 	print("Bleed - " + str(player.bleedChance))
 	print("Stun - " + str(player.stunChance))
+
+func use_card_return() -> void:
+	
+	player.stunChance = 0
+	player.bleedChance = 0
+	player.dealDamage = 0
+	var value = 0
+	
+	# Determine the card value
+	if deckArray[currentCard][0] == "T":
+		value = 10
+	elif deckArray[currentCard][0] == "J":
+		value = 11
+	elif deckArray[currentCard][0] == "Q":
+		value = 12
+	elif deckArray[currentCard][0] == "K":
+		value = 13
+	elif deckArray[currentCard][0] == "A":
+		value = 15
+	else:
+		value = int(deckArray[currentCard][0])
+	
+	# Halve the value
+	value = value / 2.0
+	
+	# Apply effects based on the card's suit
+	if deckArray[currentCard][1] == "H":
+		player.health += value
+	elif deckArray[currentCard][1] == "D":
+		player.shield += value / 2.0  # shield halved again
+	elif deckArray[currentCard][1] == "S":
+		player.dealDamage = value * 2
+		player.bleedChance = value * 4
+	elif deckArray[currentCard][1] == "C":
+		player.dealDamage = value
+		player.stunChance = value * 5
+	
+	# Print the updated values
+	print("HP - " + str(player.health))
+	print("Shield - " + String("%0.1f" % player.shield))  # Ensure the shield value prints as a float
+	print("DMG - " + str(player.dealDamage))
+	print("Bleed - " + str(player.bleedChance))
+	print("Stun - " + str(player.stunChance))
+
 
 func card_value(card: String) -> int:
 	var rank = card[0]
@@ -137,13 +181,13 @@ func _on_use_pressed() -> void:
 	deckArray.remove_at(currentCard)
 	deckArray.sort_custom(custom_sort)
 	if deckArray.size() > 0:
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.4).timeout
 		create_card()
 		visual_deck()
 	if deckArray.size() == 0:
-		cardInstance.cards = 0
+		player.cards = 0
 
 func _on_return_pressed() -> void:
-	#use_card_return()
+	use_card_return()
 	await get_tree().create_timer(0.9).timeout
 	create_card()
