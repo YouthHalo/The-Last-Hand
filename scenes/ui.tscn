@@ -9,6 +9,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Health" type="RichTextLabel" parent="."]
+texture_filter = 2
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -21,10 +22,28 @@ offset_bottom = 14.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_colors/default_color = Color(1, 0, 0, 1)
-text = "### HP"
+text = "###.# HP"
+scroll_active = false
+
+[node name="Shield" type="RichTextLabel" parent="."]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = 14.0
+offset_bottom = 70.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 1, 1, 1)
+text = "+ ###.## Shield HP"
 scroll_active = false
 
 [node name="Cards" type="RichTextLabel" parent="."]
+texture_filter = 2
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -38,20 +57,4 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_colors/default_color = Color(0, 1, 0, 1)
 text = "### Cards "
-scroll_active = false
-
-[node name="Shield" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -74.0
-offset_top = 14.0
-offset_bottom = 70.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/default_color = Color(0, 1, 1, 1)
-text = "+ ###.# Shield HP"
 scroll_active = false

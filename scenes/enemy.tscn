@@ -1,10 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c83hm1rd45ogh"]
+[gd_scene load_steps=4 format=3 uid="uid://c83hm1rd45ogh"]
 
 [ext_resource type="Texture2D" uid="uid://c6tykxedrxakk" path="res://assets/enemies/skeleton.png" id="1_hv0x6"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_u6245"]
+[ext_resource type="PackedScene" uid="uid://blikfruf32m31" path="res://scenes/ui.tscn" id="3_bf7pi"]
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_u6245")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
 texture = ExtResource("1_hv0x6")
+
+[node name="UI" parent="." instance=ExtResource("3_bf7pi")]
+offset_left = 124.0
+offset_top = -36.0
+offset_right = 124.0
+offset_bottom = -36.0
+scale = Vector2(0.75, 0.75)
