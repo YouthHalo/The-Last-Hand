@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var summoner = $".."
+
 var id = "2H"
 var inPlace = false
 var flipped = false
@@ -9,11 +11,11 @@ var returning = false
 var lastCard = false
 # Called when the node enters the scene tree for the first time.
 
-
 func _ready() -> void:
 	$use.hide()
 	$return.hide()
 	await get_tree().create_timer(0.1).timeout
+	summoner.connect("turnEnd", Callable(self, "_on_turn_end"))
 
 
 func _input(event: InputEvent) -> void:
@@ -98,3 +100,5 @@ func _on_return_pressed() -> void:
 	$return.hide()
 	returning = true
 	
+func _on_turn_end() -> void:
+	_on_use_pressed()

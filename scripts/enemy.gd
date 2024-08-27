@@ -21,6 +21,7 @@ var deckArray = [
 	"2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "TS", "JS", "QS", "KS", "AS",
 	"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "TC", "JC", "QC", "KC", "AC"
 ];
+
 var currentcards = []
 var playerTurn = true
 signal turnEnd
@@ -30,7 +31,7 @@ func _ready() -> void:
 	for i in 3:
 		currentcards.append(deckArray[randi_range(0, 51)])
 		print(currentcards)
-	deck.turnEnd.connect(self._player_turn_end)
+	deck.connect("turnEnd", Callable(self, "_on_player_turn_end"))
 
 func use_card() -> void:
 	stunChance = 0
@@ -64,6 +65,19 @@ func use_card() -> void:
 	currentcards.remove_at(0)
 	currentcards.append(deckArray[randi_range(0, 51)])
 
+func create_card() -> void:
+	var cardInstance = card.instantiate()
+	cardInstance.id = currentcards[0]
+	add_child(cardInstance)
+	var use = cardInstance.get_node("use")
+	use.hide()
+	var Return = cardInstance.get_node("return")
+	Return.hide()
+	var red = cardInstance.get_node("redExplosion")
+	red.scale = Vector2(0.5, 0.5)
+	var black = cardInstance.get_node("blackExplosion")
+	black.scale = Vector2(0.5, 0.5)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	playerTurn = player.playerTurn
@@ -92,6 +106,10 @@ func _process(delta: float) -> void:
 			game.damageToEnemy = 0
 			recieveDamage = 0
 
-func _player_turn_end() -> void:
+func _on_player_turn_end() -> void:
+	print(currentcards)
+	create_card()
 	use_card()
+	await get_tree().create_timer(0.8).timeout
+	emit_signal("turnEnd")
 	
