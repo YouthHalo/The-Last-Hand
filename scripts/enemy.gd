@@ -6,8 +6,8 @@ extends Node2D
 
 var floatUp = true
 
-var health = 50.0
-var shield = 0.0
+var health = 20.0
+var shield = 2.0
 var dealDamage = 0
 var stunChance = 0
 var bleedChance = 0
@@ -74,9 +74,9 @@ func _process(delta: float) -> void:
 	sh.text = "+ " + String("%0.2f" % shield) + " Shield HP"
 	if recieveDamage > 0:
 		if shield > 0:
-			if recieveDamage > 4*shield:
+			if recieveDamage > (4 * shield):
+				health -= recieveDamage - (4*shield)
 				shield = 0
-				health -= (recieveDamage - 4*shield)
 			else:
 				shield -= recieveDamage
 				if shield < 0:

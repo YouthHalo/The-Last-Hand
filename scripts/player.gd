@@ -10,7 +10,7 @@ var dealDamage = 0
 var stunChance = 0
 var bleedChance = 0
 var recieveDamage = 0
-
+var playerTurn = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
