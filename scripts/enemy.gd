@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var hp = $UI/Health
 @onready var sh = $UI/Shield
-
+@onready var game = $".."
 
 var floatUp = true
 
@@ -11,6 +11,7 @@ var shield = 0.0
 var dealDamage = 0
 var stunChance = 0
 var bleedChance = 0
+var recieveDamage = 0
 var deckArray = [
 	"2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "TH", "JH", "QH", "KH", "AH",
 	"2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "TD", "JD", "QD", "KD", "AD",
@@ -28,6 +29,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	recieveDamage = game.damageToEnemy
 	if floatUp:
 		position = position.lerp(Vector2(576, 150), delta * 3)
 		if position.y < 150.5:
@@ -38,3 +40,7 @@ func _process(delta: float) -> void:
 			floatUp = true
 	hp.text = String("%0.1f" % health) + " HP"
 	sh.text = "+ " + String("%0.2f" % shield) + " Shield HP"
+	if recieveDamage > 0:
+		health -= recieveDamage
+		game.damageToEnemy = 0
+		recieveDamage = 0
