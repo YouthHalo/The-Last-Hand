@@ -19,6 +19,7 @@ var deckArray = [
 	"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "TC", "JC", "QC", "KC", "AC"
 ];
 var currentcards = []
+var playerTurn = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$UI/Cards.hide()
@@ -26,6 +27,37 @@ func _ready() -> void:
 		currentcards.append(deckArray[randi_range(0, 51)])
 		print(currentcards)
 
+func use_card() -> void:
+	stunChance = 0
+	bleedChance = 0
+	dealDamage = 0
+	var value = 0
+	if currentcards[0][0] == "T":
+		value = 10
+	elif currentcards[0][0] == "J":
+		value = 11
+	elif currentcards[0][0] == "Q":
+		value = 12
+	elif currentcards[0][0] == "K":
+		value = 13
+	elif currentcards[0][0] == "A":
+		value = 15
+	else:
+		value = int(currentcards[0][0])
+	
+	if currentcards[0][1] == "H":
+		health += value
+	elif currentcards[0][1] == "D":
+		shield += float(value) / 2.0
+	elif currentcards[0][1] == "S":
+		dealDamage = value*2
+		bleedChance = value*4
+	elif currentcards[0][1] == "C":
+		dealDamage = value
+		stunChance = value*5
+	
+	currentcards.remove_at(0)
+	currentcards.append(deckArray[randi_range(0, 51)])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -41,6 +73,15 @@ func _process(delta: float) -> void:
 	hp.text = String("%0.1f" % health) + " HP"
 	sh.text = "+ " + String("%0.2f" % shield) + " Shield HP"
 	if recieveDamage > 0:
-		health -= recieveDamage
-		game.damageToEnemy = 0
-		recieveDamage = 0
+		if shield > 0:
+			if recieveDamage > 4*shield:
+				shield = 0
+				health -= (recieveDamage - 4*shield)
+			else:
+				shield -= recieveDamage
+				if shield < 0:
+					shield = 0
+		else:
+			health -= recieveDamage
+			game.damageToEnemy = 0
+			recieveDamage = 0

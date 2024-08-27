@@ -11,6 +11,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	damageToPlayer = enemy.dealDamage
-	damageToEnemy = player.dealDamage
 	enemy.recieveDamage = player.dealDamage
+	player.recieveDamage = enemy.dealDamage
+	enemy.dealDamage = 0
+	player.dealDamage = 0
