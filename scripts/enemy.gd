@@ -3,6 +3,9 @@ extends Node2D
 @onready var hp = $UI/Health
 @onready var sh = $UI/Shield
 @onready var game = $".."
+@onready var player = $"../Player"
+@onready var deck = $"../Player/Deck"
+@onready var card = preload("res://scenes/card.tscn")
 
 var floatUp = true
 
@@ -20,12 +23,14 @@ var deckArray = [
 ];
 var currentcards = []
 var playerTurn = true
+signal turnEnd
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$UI/Cards.hide()
 	for i in 3:
 		currentcards.append(deckArray[randi_range(0, 51)])
 		print(currentcards)
+	deck.turnEnd.connect(self._player_turn_end)
 
 func use_card() -> void:
 	stunChance = 0
@@ -61,6 +66,7 @@ func use_card() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	playerTurn = player.playerTurn
 	recieveDamage = game.damageToEnemy
 	if floatUp:
 		position = position.lerp(Vector2(576, 150), delta * 3)
@@ -85,3 +91,7 @@ func _process(delta: float) -> void:
 			health -= recieveDamage
 			game.damageToEnemy = 0
 			recieveDamage = 0
+
+func _player_turn_end() -> void:
+	use_card()
+	

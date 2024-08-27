@@ -12,7 +12,7 @@ var deckArray = [
 	"2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "TS", "JS", "QS", "KS", "AS",
 	"2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "TC", "JC", "QC", "KC", "AC"
 ];
-
+signal turnEnd
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
@@ -180,6 +180,7 @@ func _on_use_pressed() -> void:
 	use_card()
 	deckArray.remove_at(currentCard)
 	deckArray.sort_custom(custom_sort)
+	emit_signal("turnEnd")
 	if deckArray.size() > 0:
 		await get_tree().create_timer(0.4).timeout
 		create_card()
@@ -189,5 +190,7 @@ func _on_use_pressed() -> void:
 
 func _on_return_pressed() -> void:
 	use_card_return()
+	emit_signal("turnEnd")
+
 	await get_tree().create_timer(0.9).timeout
 	create_card()
