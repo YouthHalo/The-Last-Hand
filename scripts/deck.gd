@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var card = preload("res://scenes/card.tscn")
 @onready var player = $".."
-
+@onready var enemy = $"../../Enemy"
 var currentCard = -1
 var hover = false
 var canClick = true
@@ -17,7 +17,7 @@ signal turnEnd
 func _ready() -> void:
 	await get_tree().create_timer(0.1).timeout
 	create_card()
-
+	enemy.connect("turnEnd", Callable(self, "_on_enemy_turn_end"))
 
 func create_card() -> void:
 	var cardInstance = card.instantiate()
@@ -181,16 +181,18 @@ func _on_use_pressed() -> void:
 	deckArray.remove_at(currentCard)
 	deckArray.sort_custom(custom_sort)
 	emit_signal("turnEnd")
+
+
+func _on_return_pressed() -> void:
+	use_card_return()
+
+	await get_tree().create_timer(0.9).timeout
+	emit_signal("turnEnd")
+
+func _on_enemy_turn_end() -> void:
 	if deckArray.size() > 0:
 		await get_tree().create_timer(0.4).timeout
 		create_card()
 		visual_deck()
 	if deckArray.size() == 0:
 		player.cards = 0
-
-func _on_return_pressed() -> void:
-	use_card_return()
-	emit_signal("turnEnd")
-
-	await get_tree().create_timer(0.9).timeout
-	create_card()

@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and hover:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and hover and str(summoner) == "Deck:<Node2D#30551311626>":
 		if selected:
 			selected = false
 		else:
@@ -73,11 +73,13 @@ func _process(delta: float) -> void:
 			queue_free()
 
 func _on_area_2d_mouse_entered() -> void:
-	hover = true
+	if str(summoner) == "Deck:<Node2D#30551311626>":
+		hover = true
 
 
 func _on_area_2d_mouse_exited() -> void:
-	hover = false
+	if str(summoner) == "Deck:<Node2D#30551311626>":
+		hover = false
 
 
 func _on_use_pressed() -> void:
@@ -101,4 +103,6 @@ func _on_return_pressed() -> void:
 	returning = true
 	
 func _on_turn_end() -> void:
-	_on_use_pressed()
+	if str(summoner) != "Deck:<Node2D#30551311626>":
+		_on_use_pressed()
+		#Lets the enemy always use the card, and prevents return button from blowing it up

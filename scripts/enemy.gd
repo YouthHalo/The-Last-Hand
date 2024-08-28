@@ -83,11 +83,11 @@ func _process(delta: float) -> void:
 	playerTurn = player.playerTurn
 	recieveDamage = game.damageToEnemy
 	if floatUp:
-		position = position.lerp(Vector2(576, 150), delta * 3)
+		position = position.lerp(Vector2(672, 150), delta * 3)
 		if position.y < 150.5:
 			floatUp = false
 	else:
-		position = position.lerp(Vector2(576, 200), delta * 3)
+		position = position.lerp(Vector2(672, 200), delta * 3)
 		if position.y > 199.5:
 			floatUp = true
 	hp.text = String("%0.1f" % health) + " HP"
@@ -109,7 +109,7 @@ func _process(delta: float) -> void:
 func _on_player_turn_end() -> void:
 	print(currentcards)
 	create_card()
+	await get_tree().create_timer(1).timeout
 	use_card()
-	await get_tree().create_timer(0.8).timeout
 	emit_signal("turnEnd")
 	
