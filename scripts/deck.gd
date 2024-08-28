@@ -185,9 +185,9 @@ func _on_use_pressed() -> void:
 
 func _on_return_pressed() -> void:
 	use_card_return()
-
-	await get_tree().create_timer(0.9).timeout
 	emit_signal("turnEnd")
+	await get_tree().create_timer(0.9).timeout
+	
 
 func _on_enemy_turn_end() -> void:
 	if deckArray.size() > 0:

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cu4oo3ngishqa" path="res://assets/cards/back/sprite_57.png" id="2_ags0e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7oukm"]
-size = Vector2(50, 70)
+size = Vector2(150, 210)
 
 [sub_resource type="Gradient" id="Gradient_drtkr"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 0, 0, 1)
@@ -48,6 +48,7 @@ color_ramp = SubResource("GradientTexture1D_xkmnq")
 script = ExtResource("1_wwqs6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
 texture = ExtResource("2_ags0e")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -56,23 +57,26 @@ texture = ExtResource("2_ags0e")
 shape = SubResource("RectangleShape2D_7oukm")
 
 [node name="use" type="Button" parent="."]
-offset_left = 28.0
-offset_top = -31.0
-offset_right = 95.0
-offset_bottom = -3.0
-theme_override_font_sizes/font_size = 14
+texture_filter = 2
+offset_left = 83.0
+offset_top = -82.0
+offset_right = 225.0
+offset_bottom = -16.0
+theme_override_font_sizes/font_size = 42
 text = "use"
 
 [node name="return" type="Button" parent="."]
-offset_left = 28.0
-offset_top = 3.0
-offset_right = 95.0
-offset_bottom = 31.0
-theme_override_font_sizes/font_size = 14
+texture_filter = 2
+offset_left = 83.0
+offset_top = 16.0
+offset_right = 225.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 42
 text = "return
 "
 
 [node name="redExplosion" type="GPUParticles2D" parent="."]
+scale = Vector2(3, 3)
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_xt68m")
@@ -81,6 +85,7 @@ one_shot = true
 explosiveness = 1.0
 
 [node name="blackExplosion" type="GPUParticles2D" parent="."]
+scale = Vector2(3, 3)
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_xqi0q")

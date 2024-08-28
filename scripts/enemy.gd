@@ -69,6 +69,8 @@ func create_card() -> void:
 	var cardInstance = card.instantiate()
 	cardInstance.id = currentcards[0]
 	add_child(cardInstance)
+	var sprite = cardInstance.get_node("Sprite2D")
+	sprite.scale = Vector2(1.5, 1.5)
 	var use = cardInstance.get_node("use")
 	use.hide()
 	var Return = cardInstance.get_node("return")

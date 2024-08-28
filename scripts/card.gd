@@ -36,11 +36,19 @@ func _process(delta: float) -> void:
 				flipped = true
 		if flipped and scale.x < 1:
 			scale= scale.lerp(Vector2(1, 1), delta*20)
-		position = position.lerp(Vector2(-300, 0), delta * 3)
-		
-		if position.x < -299.9:
-			position.x = -300
-			inPlace = true
+		if str(summoner) == "Deck:<Node2D#30551311626>":
+			position = position.lerp(Vector2(-900, 0), delta * 3)
+		else:
+			position = position.lerp(Vector2(-300, 0), delta * 3)
+
+		if str(summoner) == "Deck:<Node2D#30551311626>":
+			if position.x < -899.9:
+				position.x = -900
+				inPlace = true
+		else:
+			if position.x < -299.9:
+				position.x = -300
+				inPlace = true
 			
 	if flipped and not returning:
 		if selected:
